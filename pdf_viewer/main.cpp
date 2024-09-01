@@ -239,6 +239,7 @@ float KEYBOARD_SELECT_TEXT_COLOR[] = { 0.0f , 0.0f, 0.5f, 1.0f};
 bool AUTOCENTER_VISUAL_SCROLL = false;
 bool ALPHABETIC_LINK_TAGS = false;
 bool VIMTEX_WSL_FIX = false;
+unsigned int VALIDATION_INTERVAL_TIME = 200;
 
 Path default_config_path(L"");
 Path default_keys_path(L"");

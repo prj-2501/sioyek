@@ -126,6 +126,7 @@ extern float KEYBOARD_SELECT_TEXT_COLOR[4];
 extern bool AUTOCENTER_VISUAL_SCROLL;
 extern bool ALPHABETIC_LINK_TAGS;
 extern bool VIMTEX_WSL_FIX;
+extern unsigned int VALIDATION_INTERVAL_TIME;
 
 template<typename T>
 void* generic_deserializer(std::wstringstream& stream, void* res_) {
@@ -136,6 +137,10 @@ void* generic_deserializer(std::wstringstream& stream, void* res_) {
 
 void int_serializer(void* int_pointer, std::wstringstream& stream) {
 	stream << *(int*)int_pointer;
+}
+
+void uint_serializer(void* uint_pointer, std::wstringstream& stream) {
+	stream << *(unsigned int*)uint_pointer;
 }
 
 void bool_serializer(void* bool_pointer, std::wstringstream& stream) {
@@ -314,6 +319,7 @@ ConfigManager::ConfigManager(const Path& default_path, const Path& auto_path ,co
 	auto vec4_deserializer = vec_n_deserializer<4, float>;
 	auto float_deserializer = generic_deserializer<float>;
 	auto int_deserializer = generic_deserializer<int>;
+	auto uint_deserializer = generic_deserializer<unsigned int>;
 	auto bool_deserializer = generic_deserializer<bool>;
 	auto color3_deserializer = colorn_deserializer<3>;
 	auto color4_deserializer = colorn_deserializer<4>;
@@ -444,6 +450,7 @@ ConfigManager::ConfigManager(const Path& default_path, const Path& auto_path ,co
 	configs.push_back({ L"autocenter_visual_scroll", &AUTOCENTER_VISUAL_SCROLL, bool_serializer, bool_deserializer, bool_validator });
 	configs.push_back({ L"alphabetic_link_tags", &ALPHABETIC_LINK_TAGS, bool_serializer, bool_deserializer, bool_validator });
 	configs.push_back({ L"vimtex_wsl_fix", &VIMTEX_WSL_FIX, bool_serializer, bool_deserializer, bool_validator });
+	configs.push_back({ L"validation_interval_time", &VALIDATION_INTERVAL_TIME, uint_serializer, uint_deserializer, nullptr });
 
 	std::wstring highlight_config_string = L"highlight_color_a";
 	std::wstring search_url_config_string = L"search_url_a";

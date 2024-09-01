@@ -129,6 +129,7 @@ extern bool TOC_JUMP_ALIGN_TOP;
 extern bool AUTOCENTER_VISUAL_SCROLL;
 extern bool ALPHABETIC_LINK_TAGS;
 extern bool VIMTEX_WSL_FIX;
+extern unsigned int VALIDATION_INTERVAL_TIME;
 
 const int MAX_SCROLLBAR = 10000;
 
@@ -435,12 +436,10 @@ MainWidget::MainWidget(fz_context* mupdf_context,
     // we check periodically to see if the ui needs updating
     // this is done so that thousands of search results only trigger
     // a few rerenders
-    // todo: make interval time configurable
     validation_interval_timer = new QTimer(this);
-    unsigned int INTERVAL_TIME = 200;
-    validation_interval_timer->setInterval(INTERVAL_TIME);
+    validation_interval_timer->setInterval(VALIDATION_INTERVAL_TIME);
 
-    connect(validation_interval_timer , &QTimer::timeout, [&, INTERVAL_TIME]() {
+    connect(validation_interval_timer , &QTimer::timeout, [&]() {
 
         if (is_render_invalidated) {
             validate_render();
@@ -457,8 +456,8 @@ MainWidget::MainWidget(fz_context* mupdf_context,
                 // this is because LaTeX software frequently puts PDF files in an invalid state while it is being made in
                 // multiple passes.
 
-                if ((doc->get_milies_since_last_edit_time() < (2 * INTERVAL_TIME)) &&
-                    doc->get_milies_since_last_edit_time() > INTERVAL_TIME &&
+                if ((doc->get_milies_since_last_edit_time() < (2 * VALIDATION_INTERVAL_TIME)) &&
+                    doc->get_milies_since_last_edit_time() > VALIDATION_INTERVAL_TIME &&
                     doc->get_milies_since_last_document_update_time() > doc->get_milies_since_last_edit_time()
                     ) {
 
