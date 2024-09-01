@@ -3890,22 +3890,21 @@ void MainWidget::handle_new_window() {
 std::optional<std::pair<int, fz_link*>> MainWidget::get_selected_link(const std::wstring& text) {
 	std::vector<std::pair<int, fz_link*>> visible_page_links;
 	if (ALPHABETIC_LINK_TAGS || is_string_numeric(text)) {
+		int link_index = 0;
 
-        int link_index = 0;
-
-        if (ALPHABETIC_LINK_TAGS) {
-            link_index = get_index_from_tag(utf8_encode(text));
-        }
-        else {
-			link_index = std::stoi(text);
-        }
-
-        main_document_view->get_visible_links(visible_page_links);
-		if ((link_index >= 0) && (link_index < static_cast<int>(visible_page_links.size()))) {
-            return visible_page_links[link_index];
+		if (ALPHABETIC_LINK_TAGS) {
+			link_index = get_index_from_tag(utf8_encode(text));
 		}
-        return {};
+		else {
+			link_index = std::stoi(text);
+		}
+
+		main_document_view->get_visible_links(visible_page_links);
+		if ((link_index >= 0) && (link_index < static_cast<int>(visible_page_links.size()))) {
+			return visible_page_links[link_index];
+		}
 	}
+	return {};
 }
 
 void MainWidget::handle_overview_link(const std::wstring& text) {
