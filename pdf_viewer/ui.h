@@ -33,6 +33,7 @@
 #include <qheaderview.h>
 
 #include "rapidfuzz_amalgamated.hpp"
+#include "readlinelineedit.h"
 
 #define FTS_FUZZY_MATCH_IMPLEMENTATION
 #include "fts_fuzzy_match.h"
@@ -95,7 +96,7 @@ protected:
 		QVBoxLayout* layout = new QVBoxLayout;
 		setLayout(layout);
 
-		line_edit = new QLineEdit;
+		line_edit = new ReadlineLineEdit;
 		abstract_item_view = new ViewType;
 		abstract_item_view->setModel(proxy_model);
 		abstract_item_view->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -139,7 +140,7 @@ protected:
 		return abstract_item_view;
 	}
 
-	QLineEdit* line_edit = nullptr;
+	ReadlineLineEdit* line_edit = nullptr;
 	//QSortFilterProxyModel* proxy_model = nullptr;
 	MySortFilterProxyModel* proxy_model = nullptr;
 	ViewType* abstract_item_view;

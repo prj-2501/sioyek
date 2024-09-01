@@ -399,7 +399,7 @@ MainWidget::MainWidget(fz_context* mupdf_context,
     QHBoxLayout* text_command_line_edit_container_layout = new QHBoxLayout();
 
     text_command_line_edit_label = new QLabel();
-    text_command_line_edit = new QLineEdit();
+    text_command_line_edit = new ReadlineLineEdit();
 
     text_command_line_edit_label->setFont(QFont(get_font_face_name()));
     text_command_line_edit->setFont(QFont(get_font_face_name()));

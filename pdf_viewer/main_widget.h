@@ -27,6 +27,7 @@
 #include "pdf_view_opengl_widget.h"
 #include "path.h"
 #include "checksum.h"
+#include "readlinelineedit.h"
 
 extern float VERTICAL_MOVE_AMOUNT;
 extern float HORIZONTAL_MOVE_AMOUNT;
@@ -117,7 +118,7 @@ public:
 
 	QWidget* text_command_line_edit_container = nullptr;
 	QLabel* text_command_line_edit_label = nullptr;
-	QLineEdit* text_command_line_edit = nullptr;
+	ReadlineLineEdit* text_command_line_edit = nullptr;
 	QLabel* status_label = nullptr;
 
 	bool is_render_invalidated = false;

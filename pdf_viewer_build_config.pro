@@ -51,6 +51,7 @@ HEADERS += pdf_viewer/book.h \
            pdf_viewer/synctex/synctex_parser_utils.h \
            pdf_viewer/RunGuard.h \
            pdf_viewer/OpenWithApplication.h
+           pdf_viewer/readlinelineedit.h
 
 SOURCES += pdf_viewer/book.cpp \
            pdf_viewer/config.cpp \
