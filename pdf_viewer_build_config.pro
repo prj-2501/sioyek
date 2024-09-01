@@ -86,7 +86,7 @@ win32{
 
 unix:!mac {
 
-    QMAKE_CXXFLAGS += -std=c++17
+    QMAKE_CXXFLAGS += -std=c++17 -Wno-unused-function -Wno-unused-parameter
 
     CONFIG(linux_app_image){
         LIBS += -ldl -Lmupdf/build/release -lmupdf -lmupdf-third -lmupdf-threads -lharfbuzz -lz

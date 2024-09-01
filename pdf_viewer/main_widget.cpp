@@ -172,7 +172,7 @@ void MainWidget::resizeEvent(QResizeEvent* resize_event) {
 void MainWidget::set_overview_position(int page, float offset) {
     if (page >= 0) {
         auto abspos = main_document_view->get_document()->document_to_absolute_pos({ page, 0, offset });
-		float page_height = main_document_view->get_document()->get_page_height(page);
+		//float page_height = main_document_view->get_document()->get_page_height(page);
 		opengl_widget->set_overview_page(OverviewState{abspos.y});
 		invalidate_render();
     }
@@ -2262,7 +2262,7 @@ void MainWidget::execute_command(std::wstring command, std::wstring text, bool w
 #ifdef SIOYEK_QT6
     QStringList command_parts_ = qtext.split(QRegularExpression("\\s+"), Qt::SkipEmptyParts);
 #else
-    QStringList command_parts_ = qtext.split(QRegExp("\\s+"), QString::SkipEmptyParts);
+    QStringList command_parts_ = qtext.split(QRegExp("\\s+"), Qt::SkipEmptyParts);
 #endif
 
     QStringList command_parts;
@@ -3159,11 +3159,11 @@ void MainWidget::handle_keyboard_select(const std::wstring& text) {
 
         if (parts.size() == 1) {
             std::vector<fz_irect> schar_rects;
-            std::optional<fz_irect> srect_ = get_tag_window_rect(parts.at(0).toStdString(), &schar_rects);
+            get_tag_window_rect(parts.at(0).toStdString(), &schar_rects);
             if (schar_rects.size() > 1){
                 fz_irect srect = schar_rects[0];
                 fz_irect erect = schar_rects[schar_rects.size() - 2];
-                int w = erect.x1 - erect.x0;
+                // int w = erect.x1 - erect.x0;
 
 				handle_left_click({ (srect.x0 + srect.x1) / 2 - 1, (srect.y0 + srect.y1) / 2 }, true, false, false, false);
 				handle_left_click({ erect.x0 , (erect.y0 + erect.y1) / 2 }, false, false, false, false);
