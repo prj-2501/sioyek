@@ -334,7 +334,7 @@ void configure_paths(){
 	Path home_path(QDir::homePath().toStdWString());
 	Path standard_data_path = home_path.slash(L".local").slash(L"share").slash(L"sioyek");
 	Path standard_config_path = Path(L"/etc/sioyek");
-	Path read_only_data_path = Path(L"/usr/share/sioyek");
+	Path read_only_data_path = Path(PREFIX).slash(L"share").slash(L"sioyek");
 	standard_data_path.create_directories();
 
 	default_config_path = standard_config_path.slash(L"prefs.config");

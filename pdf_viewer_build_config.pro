@@ -93,12 +93,14 @@ unix:!mac {
     } else {
         DEFINES += NON_PORTABLE
         DEFINES += LINUX_STANDARD_PATHS
-        LIBS += -ldl -lmupdf -lmupdf-third -lgumbo -lharfbuzz -lfreetype -ljbig2dec -ljpeg -lmujs -lopenjp2 -lz
+        # LIBS += -ldl -lmupdf -lmupdf-third -lgumbo -lharfbuzz -lfreetype -ljbig2dec -ljpeg -lmujs -lopenjp2 -lz
+        LIBS += -ldl -Lmupdf/build/release -lmupdf -lmupdf-third -lmupdf-threads -lharfbuzz -lz
     }
 
     isEmpty(PREFIX){
-        PREFIX = /usr
+        PREFIX = /usr/local
     }
+    DEFINES += PREFIX=L\'\"$$PREFIX\"\'
     target.path = $$PREFIX/bin
     shortcutfiles.files = resources/sioyek.desktop
     shortcutfiles.path = $$PREFIX/share/applications/
@@ -109,9 +111,9 @@ unix:!mac {
     tutorial.files = tutorial.pdf
     tutorial.path = $$PREFIX/share/sioyek/
     keys.files = pdf_viewer/keys.config
-    keys.path = $$PREFIX/etc/sioyek
+    keys.path = /etc/sioyek
     prefs.files = pdf_viewer/prefs.config
-    prefs.path = $$PREFIX/etc/sioyek
+    prefs.path = /etc/sioyek
     INSTALLS += target
     INSTALLS += shortcutfiles
     INSTALLS += icon
